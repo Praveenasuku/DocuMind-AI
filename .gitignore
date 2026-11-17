@@ -1,0 +1,13 @@
+# Secret files
+.env
+.env.*
+!.env.example
+
+# Python environment
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Mac
+.DS_Store

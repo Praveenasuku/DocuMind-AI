@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FastAPI CORS Testing</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 500px;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>AI Document Assistant</h2>
+
+        <p>Testing frontend communication with FastAPI.</p>
+
+        <button onclick="testAPI()">
+            Call FastAPI
+        </button>
+
+        <p id="result"></p>
+
+    </div>
+
+
+    <script>
+
+        async function testAPI() {
+
+            const resultElement =
+                document.getElementById("result");
+
+            try {
+
+                const response = await fetch(
+                    "http://127.0.0.1:8000/",
+                    {
+                        method: "GET",
+
+                        headers: {
+                            "X-Class-Test": "cors-demo"
+                        }
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error(
+                        "HTTP Error: " + response.status
+                    );
+                }
+
+                const data = await response.json();
+
+                resultElement.innerText =
+                    data.message;
+
+            }
+
+            catch (error) {
+
+                resultElement.innerText =
+                    "Request failed: " + error.message;
+
+                console.error(error);
+
+            }
+        }
+
+    </script>
+
+</body>
+</html>
